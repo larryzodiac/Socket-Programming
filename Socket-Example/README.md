@@ -141,3 +141,67 @@ server.listen(3000, function(){
 ```
 
 We can now add a styles.css file to our public folder and edit it to contain some styles, then, link it to the html file.
+
+## Adding Socket.io to the Project
+[Socket.io](https://socket.io/) is a JavaScript library that provides realtime, bidirectional communciation between web servers and clients. It primarily uses WebSockets as the underlying protocol, but can fallback to simpler polling if WebSockets are not supported by the client/server. It has two parts:
+
+- Client-side library that runs in the browser;
+- Server-side library for Node.js.
+
+Documentation can be found on [Socket.io's GitHub](https://github.com/socketio/socket.io/tree/master/docs) and there is also a [cheatsheet](https://gist.github.com/alexpchin/3f257d0bb813e2c8c476) which is useful.
+
+### Server Side
+We need to add Socket.io to our server, add the following code to `server.js`
+
+```
+// server.js
+var express = require('express');  
+var app = express();  
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+
+app.use(express.static(__dirname + '/public'));
+//redirect / to our index.html file
+app.get('/', function(req, res,next) {  
+    res.sendFile(__dirname + '/public/index.html');
+});
+
+//when a client connects, do this
+io.on('connection', function(client) {  
+    console.log('Client connected...');
+});
+
+//start our web server and socket.io server listening
+server.listen(3000, function(){
+  console.log('listening on *:3000');
+});
+```
+Side Note: there is a tool named nodemon that will look for changes in your server so you don't have to restart all the time.
+
+Install it using:
+
+`npm install -g nodemon`
+
+Now run `nodemon server.js` in your command line instead of `node server.js`
+
+## Client side
+Now we add Socket.io to the client side by modifying `index.html`, add the following code:
+
+```
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Socket.io Demo</title>
+      <meta charset="utf-8">
+		<link rel="stylesheet" href="style.css">
+   </head>
+   <body>
+		 <h1>Socket.io Demo</h1>	 
+		 <p id="text">0 Clients have connecteed</p>
+		 <script src="/socket.io/socket.io.js"></script>
+		 <script>
+			 var socket = io.connect();
+		</script>
+   </body>
+</html>
+```
