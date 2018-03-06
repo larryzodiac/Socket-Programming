@@ -1,4 +1,5 @@
 # Socket-Example
+This CA is based on[Andrew Errity's Repository](https://github.com/aerrity/socket-click-example) Tutorials.
 
 ## Setting Up a Node Project
 We create a new folder name 'Socket-Example' in which to initialise a new project.
@@ -116,3 +117,27 @@ app.get('/users', function(req, res,next) {
 ```
 
 would route from http://localhost:3000/users to the file public/users.html.
+
+## Serving Static Files
+Another useful feature of Express is its ability to server static files like images, CSS files and JavaScript files. This can be done using `express.static` as shown in the updated `server.js` below:
+
+```
+// server.js
+var express = require('express');  
+var app = express();  
+var server = require('http').createServer(app);  
+
+app.use(express.static(__dirname + '/public'));
+//redirect / to our index.html file
+app.get('/', function(req, res,next) {  
+    res.sendFile(__dirname + '/public/index.html');
+});
+
+//start our web server and socket.io server listening
+server.listen(3000, function(){
+  console.log('listening on *:3000');
+});
+
+```
+
+We can now add a styles.css file to our public folder and edit it to contain some styles, then, link it to the html file.
