@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 // room namespace
 const room = io.of('/room');
 
-// When a connection is made
+// When a connection is made to the room
 room.on('connection', (socket) => {
     console.log('user connected');
     // Echo user connnected to room
