@@ -1,30 +1,20 @@
-// server.js
-var express = require('express');
-var app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
-var users = {};
+const app = require('express')();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const port = 3000;
 
-app.use(express.static(__dirname + '/public'));
-//redirect / to our index.html file
-app.get('/', function(req, res,next) {
+server.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
+
+app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-io.on('connection', function(client){
-  console.log('Client connected...');
-  client.on('disconnect', function(){
-    console.log('Client disconnected...');
-  });
-  client.on('chat message', function(msg){
-    io.emit('chat message', msg);
-  });
-});
-
-//start our web server and socket.io server listening
-server.listen(3001, function(){
-  console.log('listening on *:3001');
-});
-
-
-////////////////////////////////////////////////////
+io.on('connection', (socket) => {
+    console.log('user connected');
+    socket.emit('message', { manny: 'hey how are you?'});
+    socket.on('another event', (data) => {
+        console.log(data);
+    })
+})
