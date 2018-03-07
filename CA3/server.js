@@ -18,17 +18,20 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
+// room namespace
+const room = io.of('/room');
+
 // When a connection is made
-io.on('connection', (socket) => {
+room.on('connection', (socket) => {
     console.log('user connected');
     // Echo user connnected to room
     socket.on('message', (msg) => {
         console.log(`message: ${msg}`);
-        io.emit('message', msg);
+        room.emit('message', msg);
     });
     // If a user leaves, echo disconnect
     socket.on('disconnect', () => {
         console.log('user disconnected');
-        io.emit('message', 'user disconnected');
+        room.emit('message', 'user disconnected');
     })
 })

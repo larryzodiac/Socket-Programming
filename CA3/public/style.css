@@ -1,3 +1,7 @@
+body {
+  background-color: ;
+}
+
 form {
   padding: 20px;
   position: fixed;
@@ -8,15 +12,19 @@ form {
 
 #messages {
   list-style-type: none;
-   margin: 0;
-   padding: 0;
-   width: 100%;
+  margin: 20px;
+  padding: 0;
+  /* border: 2px solid red; */
+  color: white;
 }
 
 #messages li {
+  margin-top: 10px;
   padding: 5px 10px;
+  background-color: #90C2E7;
+  border-radius: 25px 25px 25px 25px;
 }
 
 #messages li:nth-child(odd) {
-  background: #eee;
+  /* background: #eee; */
 }
