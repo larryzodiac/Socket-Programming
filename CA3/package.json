@@ -1,22 +1,16 @@
 {
   "name": "ca3",
   "version": "1.0.0",
-  "description": "Computer Networks CA3, Socket Programming Chat Room",
+  "description": "Computer Networks CA3 Chat Room",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon ./server.js --exec babel-node -e js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "Evan MacHale",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",
-    "nodemon": "^1.12.1",
-    "socket.io": "^2.0.3"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-0": "^6.24.1"
+    "socket.io": "^2.0.4"
   }
 }
