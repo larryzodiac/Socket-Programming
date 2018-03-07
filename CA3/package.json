@@ -1,7 +1,7 @@
 {
   "name": "ca3",
   "version": "1.0.0",
-  "description": "Computer Networks Continuous Assessment 3, Socket Programming Chat Room",
+  "description": "Computer Networks CA3, Socket Programming Chat Room",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",
-    "npm": "^5.7.1",
     "socket.io": "^2.0.4"
   }
 }
